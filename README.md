@@ -1,8 +1,8 @@
 # Linked List 
 
-Two clases are included
+Two clases are included:
 
-### Node
+### Class Node
 
 Models a single node in the linked list
 
@@ -13,7 +13,7 @@ Models a single node in the linked list
 - getter `value` returns the value of this node
 - setter `value(value)` sets the value of this node
 
-### LinkedList
+### Class LinkedList
 
 Models an entire linked list
 
