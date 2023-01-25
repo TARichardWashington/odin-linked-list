@@ -77,7 +77,7 @@ class LinkedList {
 
     at(position) {
         if (position >= this.size) {
-            throw new Error(
+            throw new RangeError(
                 `Attempted to access a node that does not exist within this linked list.  
             There are a total of ${this.size} nodes.`);
         }
@@ -131,6 +131,55 @@ class LinkedList {
         return nodeToReturn;
     }
 
+    insertAt(value, index) {
+        if (index > this.size) {
+            throw new RangeError(`Can't add node at index ${index}, linked list is only ${this.size} nodes long`);
+        }
+
+        if (index === this.size) { // Tail so just append it
+            this.append(value);
+            return;
+        }
+
+        if (index === 0) { // Head so 
+            this.prepend(value);
+            return;
+        }
+
+        // Insert a new node
+        // repointing the previous node to it
+        // pointing the new node to the rest of the list
+        let nodeToInsert = new Node(value);
+        let currentNode = this.at(index);
+        let previousNode = this.at(index - 1);
+
+        previousNode.nextNode = nodeToInsert;
+        nodeToInsert.nextNode = currentNode;
+    }
+    removeAt(index) {
+        if (index >= this.size) {
+            throw new RangeError(`Can't remove node at index ${index}, linked list is only ${this.size} nodes long`);
+        }
+
+        if (index === (this.size - 1)) { // Tail so just remove it
+            this.pop();
+            return;
+        }
+
+        if (index === 0) { // Head so make the next item the head
+            this._head = this.at(1);
+            return;
+        }
+
+        // Remove node at index
+        // repointing the previous node to the next node
+        let nodeToRemove = this.at(index);
+        let nextNode = this.at(index + 1);
+        let previousNode = this.at(index - 1);
+
+        previousNode.nextNode = nextNode;
+    }
+
     toString() {
         let string = '';
         let number = 0;
@@ -147,38 +196,3 @@ class LinkedList {
         return string;
     }
 }
-
-var ll1 = new LinkedList(15);
-
-//console.log(ll1.head.value);
-//console.log(ll1.tail.value);
-
-ll1.prepend(100);
-
-//console.log(ll1.tail.value);
-//console.log(ll1.head.value);
-
-ll1.append(35);
-
-console.log(ll1.tail.value);
-console.log(ll1.head.value);
-
-console.log(ll1.toString());
-
-console.log(ll1.size);
-
-console.log(ll1.at(2).value);
-
-console.log(ll1.contains(23));
-console.log(ll1.contains(15));
-
-console.log(ll1.find(15).value);
-
-ll1.pop();
-
-console.log(ll1.toString());
-
-ll1.pop();
-
-console.log(ll1.toString());
-
