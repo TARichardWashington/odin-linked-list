@@ -76,33 +76,73 @@ class LinkedList {
     }
 
     at(position) {
+        if (position >= this.size) {
+            throw new Error(
+                `Attempted to access a node that does not exist within this linked list.  
+            There are a total of ${this.size} nodes.`);
+        }
 
+        let nodeToReturn = this._head;
+
+        for (let i = 0; i < position; i++) {
+            nodeToReturn = nodeToReturn.nextNode;
+        }
+
+        return nodeToReturn;
     }
 
     pop() {
-
+        let size = this.size; // e.g. 5 elements
+        let newTail = this.at(size - 2); // Second to last element
+        newTail.nextNode = null; // Detech the last element
     }
 
     contains(value) {
+        let isValueContained = false;
 
+        let currentNode = this._head;
+
+        while (currentNode) {
+            if (currentNode.value === value) {
+                isValueContained = true;
+                break;
+            }
+
+            currentNode = currentNode.nextNode;
+        }
+
+        return isValueContained;
     }
 
     find(value) {
+        let nodeToReturn = false;
 
+        let currentNode = this._head;
+
+        while (currentNode) {
+            if (currentNode.value === value) {
+                nodeToReturn = currentNode;
+                break;
+            }
+
+            currentNode = currentNode.nextNode;
+        }
+
+        return nodeToReturn;
     }
 
     toString() {
         let string = '';
-        let number = 1;
+        let number = 0;
         let currentNode = this._head;
 
-        string = `This linked list is ${this.size} nodes long. \n\n`;
-
         while (currentNode) {
-            string += 'Item ' + number + ': ' + currentNode.value + '\n';
+            string += `(${currentNode.value}) -> `;
             number++;
             currentNode = currentNode.nextNode;
         }
+
+        string += 'null';
 
         return string;
     }
@@ -127,5 +167,18 @@ console.log(ll1.toString());
 
 console.log(ll1.size);
 
+console.log(ll1.at(2).value);
 
+console.log(ll1.contains(23));
+console.log(ll1.contains(15));
+
+console.log(ll1.find(15).value);
+
+ll1.pop();
+
+console.log(ll1.toString());
+
+ll1.pop();
+
+console.log(ll1.toString());
 
