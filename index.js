@@ -75,8 +75,8 @@ class LinkedList {
         return theTail;
     }
 
-    at(position) {
-        if (position >= this.size) {
+    at(index) {
+        if (index >= this.size) {
             throw new RangeError(
                 `Attempted to access a node that does not exist within this linked list.  
             There are a total of ${this.size} nodes.`);
@@ -84,7 +84,7 @@ class LinkedList {
 
         let nodeToReturn = this._head;
 
-        for (let i = 0; i < position; i++) {
+        for (let i = 0; i < index; i++) {
             nodeToReturn = nodeToReturn.nextNode;
         }
 
@@ -141,7 +141,7 @@ class LinkedList {
             return;
         }
 
-        if (index === 0) { // Head so 
+        if (index === 0) { // Head so just prepend it
             this.prepend(value);
             return;
         }
@@ -196,3 +196,11 @@ class LinkedList {
         return string;
     }
 }
+
+let myNewLinkedList = new LinkedList(5) // Creates a new linked list with a singe node
+
+myNewLinkedList.append(5);
+myNewLinkedList.prepend(23);
+
+let myNewLinkedListSize = myNewLinkedList.size; // 1
+let myNewLinkedListString = myNewLinkedList.toString(); // (23) -> (5) -> (5) -> null
