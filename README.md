@@ -37,7 +37,7 @@ Models an entire linked list
 
 ### Usage
 
-```
+```javascript
 let myNewLinkedList = new LinkedList(5) // Creates a new linked list with a singe node
 
 myNewLinkedList.append(5);
